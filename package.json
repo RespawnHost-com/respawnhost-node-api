@@ -20,6 +20,7 @@
     "build": "tsc && bun build ./index.ts --outdir ./dist --target node --format esm",
     "dev": "bun run index.ts",
     "test": "bun test",
+    "validate-schema": "bun scripts/validate-schema.ts",
     "prepublishOnly": "bun run build"
   },
   "keywords": [
@@ -31,18 +32,21 @@
     "minecraft",
     "hosting"
   ],
-  "author": "",
+  "author": "Nils van Lück",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/respawnhost-ts-sdk"
+    "url": "https://github.com/RespawnHost-com/respawnhost-node-api"
   },
   "bugs": {
-    "url": "https://github.com/your-username/respawnhost-ts-sdk/issues"
+    "url": "https://github.com/RespawnHost-com/respawnhost-node-api/issues"
   },
-  "homepage": "https://github.com/your-username/respawnhost-ts-sdk#readme",
+  "homepage": "https://github.com/RespawnHost-com/respawnhost-node-api#readme",
   "devDependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0",
     "@types/bun": "latest",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
@@ -53,5 +57,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "decimal.js": "^10.6.0"
   }
 }

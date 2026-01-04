@@ -1,0 +1,10 @@
+name: API Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: schemathesis/action@v2
+        with:
+          schema: ${{ vars.OPENAPI_SCHEMA_URL }}
