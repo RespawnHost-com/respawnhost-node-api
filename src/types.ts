@@ -1,5 +1,3 @@
-import type { Decimal } from "decimal.js";
-
 export enum BackupInterval {
   DAILY = "DAILY",
   WEEKLY = "WEEKLY",
@@ -140,8 +138,8 @@ export interface GamePackage {
   memory: number;
   disk: number;
   gameId: number;
-  priceHourly: Decimal;
-  priceMonthly: Decimal;
+  priceHourly: string;
+  priceMonthly: string;
   game: Game;
 }
 

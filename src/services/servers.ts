@@ -40,7 +40,6 @@ import { DatabasesService } from './databases';
 import { FilesService } from './files';
 import { SchedulesService } from './schedules';
 import { SharesService } from './shares';
-import Decimal from 'decimal.js';
 
 export class ServersService {
   public readonly backups: BackupsService;
@@ -68,10 +67,7 @@ export class ServersService {
     summaryOnly?: boolean;
   }): Promise<ServersListResponse> {
     const response = await this.client.get<ServersListResponse>('/api/v1/servers', params);
-    response.data.map(server => {
-      return {...server, gamePackage: {...server.gamePackage, priceHourly: new Decimal(server.gamePackage.priceHourly), priceMonthly: new Decimal(server.gamePackage.priceMonthly)}};
-    })
-    return  response;
+    return response;
   }
 
   async rent(request: RentServerRequest): Promise<ServerRentResponse> {
