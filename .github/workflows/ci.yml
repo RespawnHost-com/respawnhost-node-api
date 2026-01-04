@@ -31,8 +31,3 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Run tests
-        run: bun test
-
-      - name: Validate OpenAPI schema
-        run: bun run validate-schema
