@@ -199,36 +199,89 @@ When the OpenAPI spec is updated:
 
 ## Semantic Versioning
 
-- **Major (X.0.0)**: Breaking changes (API changes, removed methods)
-- **Minor (0.X.0)**: New features (new endpoints, new methods)
-- **Patch (0.0.X)**: Bug fixes, internal changes
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) and [Release Please](https://github.com/googleapis/release-please) for automated semantic versioning.
 
-Version is in `package.json` under the `version` field.
+### Version Bumping
+
+Version bumps are determined automatically based on commit messages:
+
+- **Major (X.0.0)**: Commits with `BREAKING CHANGE:` in the footer, or `!` after the type (e.g., `feat!:`)
+- **Minor (0.X.0)**: Commits starting with `feat:` (new features)
+- **Patch (0.0.X)**: Commits starting with `fix:` (bug fixes)
+
+### Commit Message Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+**Types**:
+- `feat`: A new feature (triggers minor version bump)
+- `fix`: A bug fix (triggers patch version bump)
+- `docs`: Documentation only changes
+- `style`: Changes that don't affect code meaning (formatting, etc.)
+- `refactor`: Code change that neither fixes a bug nor adds a feature
+- `perf`: Performance improvement
+- `test`: Adding or correcting tests
+- `chore`: Changes to build process or auxiliary tools
+
+**Examples**:
+```bash
+git commit -m "feat: add server restart endpoint"
+git commit -m "fix: correct authentication header format"
+git commit -m "feat!: change API response format" # Breaking change
+git commit -m "docs: update README with new examples"
+```
 
 ## Publishing Workflow
 
-The GitHub Actions workflow (`.github/workflows/publish.yml`) handles publishing:
+This project uses automated releases via GitHub Actions and Release Please.
 
-1. **Build Job**:
-   - Runs on every push to `main`
-   - Checks out code
-   - Sets up Bun
-   - Installs dependencies
+### Workflows
+
+1. **CI Workflow** (`.github/workflows/ci.yml`):
+   - Runs on every push to `main` and pull requests
    - Builds the project
-   - Uploads build artifacts
+   - Runs tests
+   - Validates OpenAPI schema
 
-2. **Publish Job**:
-   - Only runs on GitHub releases
-   - Downloads build artifacts
-   - Publishes to npm with `bun publish --access public`
-   - Requires `NPM_TOKEN` secret in GitHub repository
+2. **Release Workflow** (`.github/workflows/release.yml`):
+   - Runs on pushes to `main`
+   - Uses Release Please to analyze commits and create release PRs
+   - When a release PR is merged, automatically:
+     - Updates version in `package.json`
+     - Updates `CHANGELOG.md`
+     - Creates a GitHub release with version tag
+     - Publishes to npm
 
-**To publish manually**: Run `bun publish --access public`
+### How to Release
 
-**To publish via GitHub**:
-1. Update version in `package.json`
-2. Create and push a tag: `git tag v1.0.0 && git push origin v1.0.0`
-3. Create a release on GitHub
+**Automatic Release (Recommended)**:
+1. Make changes and commit using conventional commit messages
+2. Push to `main` branch
+3. Release Please will automatically create/update a release PR
+4. Review and merge the release PR
+5. Package is automatically published to npm
+
+**Manual Release** (if needed):
+```bash
+# Update version manually
+npm version patch|minor|major
+
+# Build and publish
+bun run build
+bun publish --access public
+```
+
+### Release Please Configuration
+
+- Config: `.github/release-please-config.json`
+- Manifest: `.github/.release-please-manifest.json`
+- Changelog: `CHANGELOG.md`
 
 ## Testing
 

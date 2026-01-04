@@ -845,9 +845,21 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+3. Commit your changes using [Conventional Commits](https://www.conventionalcommits.org/):
+   - `feat: add some amazing feature` (new feature)
+   - `fix: resolve some issue` (bug fix)
+   - `docs: update documentation` (documentation)
+   - `feat!: breaking change` (major version bump)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+### Versioning
+
+This project uses [Semantic Versioning](https://semver.org/) with automated releases via [Release Please](https://github.com/googleapis/release-please). Version bumps are determined automatically based on commit messages:
+
+- **Major**: Commits with `BREAKING CHANGE:` or `!` after type (e.g., `feat!:`)
+- **Minor**: Commits starting with `feat:`
+- **Patch**: Commits starting with `fix:`
 
 ### Development
 
