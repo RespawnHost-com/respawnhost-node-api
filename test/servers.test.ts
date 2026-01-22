@@ -239,4 +239,36 @@ describe('ServersService', () => {
 
     console.log('⚠️  Skipping modpack install test (requires specific modpack details)');
   });
+
+  it('should rent a server', async () => {
+    if (!services) return;
+    if (skipIfDestructive()) return;
+
+    console.log('⚠️  Skipping rent server test (would create a new server)');
+    // Example usage with instance_count:
+    // const result = await services.servers.rent({
+    //   game_short: 'minecraft',
+    //   plan_id: 1,
+    //   region: 'eu' as Region,
+    //   instance_count: 1,
+    // });
+    // expect(result).toBeDefined();
+    // expect(result.id).toBeDefined();
+    // expect(result.panelUuid).toBeDefined();
+  });
+
+  it('should rent multiple server instances', async () => {
+    if (!services) return;
+    if (skipIfDestructive()) return;
+
+    console.log('⚠️  Skipping rent multiple servers test (would create new servers)');
+    // Example usage with instance_count > 1:
+    // const result = await services.servers.rent({
+    //   game_short: 'minecraft',
+    //   plan_id: 1,
+    //   region: 'eu' as Region,
+    //   instance_count: 3,
+    // });
+    // expect(result).toBeDefined();
+  });
 });
