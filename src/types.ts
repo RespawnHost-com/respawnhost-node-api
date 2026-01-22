@@ -552,6 +552,7 @@ export interface RentServerRequest {
   region?: Region;
   template_id?: number;
   template_version_id?: number;
+  instance_count?: number;
 }
 
 export interface ServerRentResponse {
